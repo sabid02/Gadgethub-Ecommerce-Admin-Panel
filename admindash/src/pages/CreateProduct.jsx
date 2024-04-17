@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
+import { RiFolderUploadLine } from "react-icons/ri";
 
 const CreateProduct = () => {
   const [img, setImg] = useState(null);
@@ -49,15 +50,33 @@ const CreateProduct = () => {
             onChange={(e) => setImg(e.target.files[0])}
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
+          {img ? (
+            <img
+              src={URL.createObjectURL(img)}
+              alt="Uploaded"
+              className="my-2"
+              style={{ maxWidth: "100%", maxHeight: "200px" }}
+            />
+          ) : (
+            <RiFolderUploadLine className="max-w-full max-h-200px" />
+          )}
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Category</label>
-          <input
-            type="text"
+          <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2 w-full"
-          />
+          >
+            <option value="">Select a category</option>
+            <option value="Camera">Camera</option>
+            <option value="Phone">Phone</option>
+            <option value="Laptop">Laptop</option>
+            <option value="Desktop">Desktop</option>
+            <option value="VR Box">VR Box</option>
+            <option value="Processor">Processor</option>
+            <option value="Smart Watch">Smart Watch</option>
+          </select>
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Title</label>

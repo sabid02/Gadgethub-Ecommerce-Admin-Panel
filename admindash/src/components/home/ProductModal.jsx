@@ -24,9 +24,15 @@ const ProductModal = ({ product, onClose }) => {
           {product.publishYear}
         </h2>
         <h4 className="my-2 text-gray-500">{product._id}</h4>
-        <div className="flex justify-start items-center gap-x-2">
-          <CiImageOn className="text-red-300 text-2xl" />
-          <h2 className="my-1">{product.img}</h2>
+        <div className="my-4">
+          <span className="text-xl mr-4 text-gray-500">Image</span>
+          {product.img && (
+            <img
+              src={`../../server/${product.img}`}
+              alt="Product Image"
+              className="max-w-full max-h-200px"
+            />
+          )}
         </div>
         <div className="flex justify-start items-center gap-x-2">
           <PiBookOpenTextLight className="text-red-300 text-2xl" />

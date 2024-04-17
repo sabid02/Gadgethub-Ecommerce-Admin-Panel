@@ -36,7 +36,13 @@ const ShowProduct = () => {
           </div>
           <div className="my-4">
             <span className="text-xl mr-4 text-gray-500">Image</span>
-            <span>{product.img}</span>
+            {product.img && (
+              <img
+                src={product.img}
+                alt="Product Image"
+                className="max-w-full max-h-200px"
+              />
+            )}
           </div>
           <div className="my-4">
             <span className="text-xl mr-4 text-gray-500">Category</span>

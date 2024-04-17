@@ -21,7 +21,14 @@ const ProductSingleCard = ({ product }) => {
       <h4 className="my-2 text-gray-500">{product._id}</h4>
       <div className="flex justify-start items-center gap-x-2">
         <CiImageOn className="text-red-300 text-2xl" />
-        <h2 className="my-1">{product.img}</h2>
+
+        {product.img && (
+          <img
+            src={`http://localhost:7000/${product.img}`}
+            alt="Product Image"
+            className="max-w-full max-h-200px"
+          />
+        )}
       </div>
       <div className="flex justify-start items-center gap-x-2">
         <BiCategory className="text-red-300 text-2xl" />
@@ -32,12 +39,12 @@ const ProductSingleCard = ({ product }) => {
         <h2 className="my-1">{product.title}</h2>
       </div>
       <div className="flex justify-start items-center gap-x-2">
-        <TbFileDescription className="text-red-300 text-2xl" />
-        <h2 className="my-1">{product.description}</h2>
-      </div>
-      <div className="flex justify-start items-center gap-x-2">
         <MdOutlinePriceChange className="text-red-300 text-2xl" />
         <h2 className="my-1">{product.price}</h2>
+      </div>
+      <div className="flex justify-start items-center gap-x-2">
+        <TbFileDescription className="text-red-300 text-2xl" />
+        <h2 className="my-1 text-sm">{product.description}</h2>
       </div>
       <div className="flex justify-between items-center gap-x-2 mt-4 p-4">
         <BiShow

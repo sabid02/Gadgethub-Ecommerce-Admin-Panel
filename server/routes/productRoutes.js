@@ -19,10 +19,11 @@ const upload = multer({ storage: storage });
 
 // Route to save product with file upload
 router.post("/", upload.single("img"), async (request, response) => {
+  console.log(request.file, request.body, 16);
   try {
     if (
       !request.body.category ||
-      !request.file || // Changed from request.body.img to request.file
+      !request.file ||
       !request.body.title ||
       !request.body.description ||
       !request.body.price
@@ -34,7 +35,7 @@ router.post("/", upload.single("img"), async (request, response) => {
     }
     const newProduct = {
       category: request.body.category,
-      img: request.file.path, // Use the file path provided by Multer
+      img: request.file.path,
       title: request.body.title,
       description: request.body.description,
       price: request.body.price,
@@ -78,23 +79,36 @@ router.get("/:id", async (request, response) => {
 });
 
 //Routes to update product by id
-router.put("/:id", async (request, response) => {
+router.put("/:id", upload.single("img"), async (request, response) => {
   try {
+    const { id } = request.params;
+
+    // Check if any required field is missing
     if (
       !request.body.category ||
-      !request.body.img ||
       !request.body.title ||
       !request.body.description ||
       !request.body.price
     ) {
       return response.status(400).send({
         message:
-          "Send all required fields:category, image, description, price  ",
+          "Send all required fields: category, title, description, price",
       });
     }
 
-    const { id } = request.params;
-    const result = await Product.findByIdAndUpdate(id, request.body);
+    const updatedProduct = {
+      category: request.body.category,
+      title: request.body.title,
+      description: request.body.description,
+      price: request.body.price,
+    };
+
+    // If image is uploaded, update the img field
+    if (request.file) {
+      updatedProduct.img = request.file.path;
+    }
+
+    const result = await Product.findByIdAndUpdate(id, updatedProduct);
 
     if (!result) {
       return response.status(404).send({
@@ -106,7 +120,7 @@ router.put("/:id", async (request, response) => {
       .status(200)
       .send({ message: "Product updated successfully" });
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
     response.status(500).send({ message: error.message });
   }
 });

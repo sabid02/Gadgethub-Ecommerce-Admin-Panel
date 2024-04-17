@@ -11,7 +11,7 @@ import ProductTable from "../components/home/ProductTable";
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showType, setShowType] = useState("table");
+  const [showType, setShowType] = useState("card");
 
   useEffect(() => {
     setLoading(true);
