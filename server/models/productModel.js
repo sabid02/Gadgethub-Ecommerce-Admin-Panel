@@ -21,6 +21,10 @@ const productSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  label: {
+    type: String,
+    required: true,
+  },
 });
 
 export const Product = mongoose.model("Product", productSchema);

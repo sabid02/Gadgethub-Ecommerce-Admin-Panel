@@ -45,8 +45,8 @@ const ShowProduct = () => {
             )}
           </div>
           <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Category</span>
-            <span>{product.category}</span>
+            <span className="text-xl mr-4 text-gray-500">Label</span>
+            <span>{product.label}</span>
           </div>
           <div className="my-4">
             <span className="text-xl mr-4 text-gray-500">Title:</span>
@@ -59,6 +59,10 @@ const ShowProduct = () => {
           <div className="my-4">
             <span className="text-xl mr-4 text-gray-500">Price:</span>
             <span>{product.price}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">Category</span>
+            <span>{product.category}</span>
           </div>
           {/* <div className="my-4">
             <span className="text-xl mr-4 text-gray-500">

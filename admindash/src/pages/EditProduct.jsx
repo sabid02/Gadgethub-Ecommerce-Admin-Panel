@@ -12,6 +12,7 @@ function EditProduct({ product }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
+  const [label, setLabel] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -26,6 +27,7 @@ function EditProduct({ product }) {
         setTitle(response.data.title);
         setDescription(response.data.description);
         setPrice(response.data.price);
+        setLabel(response.data.label);
         setLoading(false);
       })
       .catch((error) => {
@@ -43,6 +45,7 @@ function EditProduct({ product }) {
     formData.append("title", title);
     formData.append("description", description);
     formData.append("price", price);
+    formData.append("label", label);
 
     setLoading(true);
     axios
@@ -113,14 +116,14 @@ function EditProduct({ product }) {
             className="border-2 border-gray-500 px-4 py-2 w-full"
           >
             <option value="">Select a category</option>
-            <option value="Camera">Camera</option>
-            <option value="Phone">Phone</option>
-            <option value="Laptop">Laptop</option>
-            <option value="Desktop">Desktop</option>
-            <option value="VR Box">VR Box</option>
-            <option value="Processor">Processor</option>
-            <option value="Smart Watch">Smart Watch</option>
-            <option value="Projector">Projector</option>
+            <option value="camera">Camera</option>
+            <option value="phone">Phone</option>
+            <option value="laptop">Laptop</option>
+            <option value="desktop">Desktop</option>
+            <option value="vrbox">VR Box</option>
+            <option value="processor">Processor</option>
+            <option value="smartwatch">Smart Watch</option>
+            <option value="projector">Projector</option>
           </select>
         </div>
         <div className="my-4">
@@ -149,6 +152,24 @@ function EditProduct({ product }) {
             onChange={(e) => setPrice(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
+        </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Label</label>
+          <select
+            value={label}
+            onChange={(e) => setLabel(e.target.value)}
+            className="border-2 border-gray-500 px-4 py-2 w-full"
+          >
+            <option value="">Select a Label</option>
+            <option value="Camera">Camera</option>
+            <option value="Phone">Phone</option>
+            <option value="Laptop">Laptop</option>
+            <option value="Desktop">Desktop</option>
+            <option value="VR Box">VR Box</option>
+            <option value="Processor">Processor</option>
+            <option value="Smart Watch">Smart Watch</option>
+            <option value="Projector">Projector</option>
+          </select>
         </div>
         <button className="p-2 bg-sky-300 m-4" onClick={handleEditProduct}>
           Save

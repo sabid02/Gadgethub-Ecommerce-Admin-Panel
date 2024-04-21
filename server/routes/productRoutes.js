@@ -23,10 +23,10 @@ router.post("/", upload.single("img"), async (request, response) => {
   try {
     if (
       !request.body.category ||
-      !request.file ||
       !request.body.title ||
       !request.body.description ||
-      !request.body.price
+      !request.body.price ||
+      !request.body.label
     ) {
       return response.status(400).send({
         message:
@@ -39,6 +39,7 @@ router.post("/", upload.single("img"), async (request, response) => {
       title: request.body.title,
       description: request.body.description,
       price: request.body.price,
+      label: request.body.label,
     };
 
     const product = await Product.create(newProduct);
@@ -88,19 +89,22 @@ router.put("/:id", upload.single("img"), async (request, response) => {
       !request.body.category ||
       !request.body.title ||
       !request.body.description ||
-      !request.body.price
+      !request.body.price ||
+      !request.body.label
     ) {
       return response.status(400).send({
         message:
-          "Send all required fields: category, title, description, price",
+          "Send all required fields: category, title, description, price, label",
       });
     }
 
     const updatedProduct = {
       category: request.body.category,
+      img: request.file.path,
       title: request.body.title,
       description: request.body.description,
       price: request.body.price,
+      label: request.body.label,
     };
 
     // If image is uploaded, update the img field
